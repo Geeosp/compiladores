@@ -32,7 +32,7 @@ public class TestCoffeeMaker extends RWTest {
     JAR_FILENAME = EXAMPLES_JAR + SEP + "coffee.jar";
   }
   
-  @Test
+  //@Test
   public void test0() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String strCompUnit = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
     String line = "if(addRecipe(newRecipe)) {";

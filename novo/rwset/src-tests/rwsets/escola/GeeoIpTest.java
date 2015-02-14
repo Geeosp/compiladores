@@ -21,7 +21,7 @@ public class GeeoIpTest extends RWTest {
     JAR_FILENAME = EXAMPLES_JAR + SEP + "escola.jar";
   }
 
- @Test
+ //@Test
   public void testAtualizarProfessor() throws IOException, WalaException,
       CancelException, ParseException, InvalidClassFileException {
     String strCompUnit = EXAMPLES_SRC + SEP + "escola-src" + SEP + "escola" + SEP + "fachadaEscola" + SEP + "Escola.java";
@@ -31,7 +31,7 @@ public class GeeoIpTest extends RWTest {
     checkDeps("escola", strCompUnit, line, JAR_FILENAME, expectedResultFile);
   }
 
-   @Test
+   //@Test
   public void testFindNameInArray() throws ParseException,
       InvalidClassFileException, IOException, WalaException, CancelException {
 
@@ -54,8 +54,8 @@ public class GeeoIpTest extends RWTest {
     checkDeps("escola", strCompUnit, line, JAR_FILENAME, expectedResultFile);
    }
 
-  @Ignore(value="MethodDependencyAnalysis.java:444 (NullPointerException)")
-  @Test
+  //@Ignore(value="MethodDependencyAnalysis.java:444 (NullPointerException)")
+//  @Test
   public void testPaginaPrincipal() throws ParseException,
       InvalidClassFileException, IOException, WalaException, CancelException {
 

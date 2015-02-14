@@ -24,38 +24,38 @@ public class LogicaTest extends RWTest {
 
   String srcdir = EXAMPLES_SRC + SEP + "logica-src";
 
-  // @Test
-  // public void testClearClausulas() throws IOException, WalaException,
-  // CancelException, ParseException, InvalidClassFileException {
-  //
-  // String strCompUnit = srcdir + SEP + "logica" + SEP + "Resolucao.java";
-  // String line = "clausulas.clear();";
-  // String expectedResultFile = TEST_DIR + SEP +
-  // "rwsets/logica/LogicaTest.testClearClausulas.data";
-  // checkDeps("logica", strCompUnit, line, JAR_FILENAME, expectedResultFile);
-  // }
+//   @Test
+//   public void testClearClausulas() throws IOException, WalaException,
+//   CancelException, ParseException, InvalidClassFileException {
+//  
+//   String strCompUnit = srcdir + SEP + "logica" + SEP + "Resolucao.java";
+//   String line = "clausulas.clear();";
+//   String expectedResultFile = TEST_DIR + SEP +
+//   "rwsets/logica/LogicaTest.testClearClausulas.data";
+//   checkDeps("logica", strCompUnit, line, JAR_FILENAME, expectedResultFile);
+//   }
 
-  @Test
-  public void testFunctionsHorn() throws IOException, WalaException,
-      CancelException, ParseException, InvalidClassFileException {
+//  @Test
+//  public void testFunctionsHorn() throws IOException, WalaException,
+//      CancelException, ParseException, InvalidClassFileException {
+//
+//    String strCompUnit = srcdir + SEP + "logica" + SEP + "Resolucao.java";
+//    String line = "if (Functions.verifyHorn(exp)){";
+//    String expectedResultFile = TEST_DIR + SEP
+//        + "rwsets/logica/LogicaTest.testFunctionsHorn.data";
+//    checkDeps("logica", strCompUnit, line, JAR_FILENAME, expectedResultFile);
+//  }
 
-    String strCompUnit = srcdir + SEP + "logica" + SEP + "Resolucao.java";
-    String line = "if (Functions.verifyHorn(exp)){";
-    String expectedResultFile = TEST_DIR + SEP
-        + "rwsets/logica/LogicaTest.testFunctionsHorn.data";
-    checkDeps("logica", strCompUnit, line, JAR_FILENAME, expectedResultFile);
-  }
-
-  // @Test
-  // public void testFunctionsSAT() throws IOException, WalaException,
-  // CancelException, ParseException, InvalidClassFileException {
-  //
-  // String strCompUnit = srcdir + SEP + "logica" + SEP + "Resolucao.java";
-  // String line = "if (Functions.SAT(exp, clausulas)){";
-  // String expectedResultFile = TEST_DIR + SEP +
-  // "rwsets/logica/LogicaTest.testFunctionsSAT.data";
-  // checkDeps("logica", strCompUnit, line, JAR_FILENAME, expectedResultFile);
-  // }
+   @Test
+   public void testFunctionsSAT() throws IOException, WalaException,
+   CancelException, ParseException, InvalidClassFileException {
+  
+   String strCompUnit = srcdir + SEP + "logica" + SEP + "Resolucao.java";
+   String line = "if (Functions.SAT(exp, clausulas)){";
+   String expectedResultFile = TEST_DIR + SEP +
+   "rwsets/logica/LogicaTest.testFunctionsSAT.data";
+   checkDeps("logica", strCompUnit, line, JAR_FILENAME, expectedResultFile);
+   }
   //
   // @Ignore
   // @Test

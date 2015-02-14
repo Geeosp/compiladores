@@ -23,7 +23,7 @@ public class HardwareTest extends RWTest {
   
   String srcdir = EXAMPLES_SRC + SEP + "hardware-src" ;
 
-  @Test
+  //@Test
   public void testArquivoPrintln() throws IOException, WalaException,
       CancelException, ParseException, InvalidClassFileException {
     String strCompUnit =  srcdir + SEP + "hardware" + SEP + "Montador.java";
@@ -54,7 +54,7 @@ public class HardwareTest extends RWTest {
 
   }
   
-  //@Test
+  @Test
   public void testOpcodeAdd() throws IOException, WalaException,
       CancelException, ParseException, InvalidClassFileException {
     String strCompUnit = srcdir + SEP +  "hardware" + SEP + "TipoJ.java";

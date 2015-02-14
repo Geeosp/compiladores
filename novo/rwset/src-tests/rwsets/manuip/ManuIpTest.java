@@ -32,7 +32,7 @@ public class ManuIpTest extends RWTest {
     checkDeps("fachada", strCompUnit, line, JAR_FILENAME, expectedResultFile);
     
   }
- @Test
+@Test
  public void testRealizarEmprestimo() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
    String strCompUnit = srcdir + SEP + "biblioteca" + SEP + "fachada" + SEP + "Principal.java";
    String line = "String[] salaDados = mSala.getCacheDados();";

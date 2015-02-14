@@ -36,14 +36,14 @@ public class Sanity extends RWTest {
     JAR_FILENAME = EXAMPLES_JAR + SEP + "foo.jar";
   }
   
-  @Test
+  //@Test
   public void testBasicDoesNotCrash() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String strCompUnit = EXAMPLES_SRC + SEP + "foo/D.java";
     String line = "System.out.println(\"hello\");";   
     checkDeps("foo", strCompUnit, line, JAR_FILENAME, null);
   }
   
-  @Test
+  //@Test
   public void testIR_isNotEmpty() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String strCompUnit = EXAMPLES_SRC + SEP + "foo/D.java";
     // checks
@@ -97,7 +97,7 @@ public class Sanity extends RWTest {
 
   }
   
-  @Test
+ //@Test
   public void testPrimitiveTypeDependency() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String strCompUnit = EXAMPLES_SRC + SEP + "foo/B.java";
     String line = "a.y + a.z > c.y + w";    
@@ -105,7 +105,7 @@ public class Sanity extends RWTest {
     checkDeps("foo", strCompUnit, line, JAR_FILENAME, expectedResultFile);
   }
   
-  @Test
+  //@Test
   public void testArrayDependency() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String strCompUnit = EXAMPLES_SRC + SEP + "foo/FooArray.java";
     String line = "t[1] = t[1] + \"!\";";    
@@ -113,7 +113,7 @@ public class Sanity extends RWTest {
     checkDeps("foo", strCompUnit, line, JAR_FILENAME, expectedResultFile);
   }
   
-  @Test
+// @Test
   public void testReferenceDependency() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String strCompUnit = EXAMPLES_SRC + SEP + "foo/FooReference.java";
     String line = "System.out.println(t);";    
@@ -121,7 +121,7 @@ public class Sanity extends RWTest {
     checkDeps("foo", strCompUnit, line, JAR_FILENAME, expectedResultFile);
   }
   
-  @Test
+  //@Test
   public void testCollectionsDependency() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String strCompUnit = EXAMPLES_SRC + SEP + "foo/FooCollections.java";
     String line = "(t.size())";    
