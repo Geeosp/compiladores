@@ -90,14 +90,17 @@ public class MethodDependencyAnalysis {
   /**
    * instance fields
    */
-  AnalysisScope scope;
+  public AnalysisScope scope;
   private ClassHierarchy cha;
-  AnalysisOptions options;
+  static AnalysisOptions options;
   // several caches
+  static PointerAnalysis pa;
   static AnalysisCache cache;
   // application(instance)-specific caches
   private Map<IMethod, RWSet> rwSets = new HashMap<IMethod, RWSet>();
 
+ 
+    
   /**
    * Callgraph generator for this analysis
    */
@@ -114,7 +117,7 @@ public class MethodDependencyAnalysis {
    * @throws WalaException
    * @throws CancelException
    */
-  Arquivo arq;
+  static Arquivo arq;
   public MethodDependencyAnalysis(Properties p) throws IOException,
       IllegalArgumentException, WalaException, CancelException {
     
@@ -183,9 +186,9 @@ public class MethodDependencyAnalysis {
       }
       
       //simple example of how to use pointer analysis. 
-      searchAliasedPointers(cgg);
+      PointsTo.procurarPonteirosAssociados(cgg, this);
         
-      // propagate RWSet from callees (only private methods) to callers
+      // propagate RWSet from calls (only private methods) to callers
       propagateRWSets(graph);
       if (debugTime) {
         timer.stop();
@@ -207,10 +210,10 @@ public class MethodDependencyAnalysis {
   //print possible alias for pointers. 
   //more info at: http://wala.sourceforge.net/wiki/index.php/UserGuide:PointerAnalysis#Heap_Graph
   
-  private void searchAliasedPointers(CallGraphGenerator cgg)
+  static void searchAliasedPointers(CallGraphGenerator cgg)
       throws CallGraphBuilderCancelException {
     
-    PointerAnalysis pa = cgg.getPointerAnalysis();
+    pa = cgg.getPointerAnalysis();
     Iterator<PointerKey> it = pa.getHeapModel().iteratePointerKeys();
     HeapGraph hgraph = pa.getHeapGraph();
   
@@ -266,7 +269,7 @@ public class MethodDependencyAnalysis {
 //            String[] names = ir.getLocalNames(index, lpk.getValueNumber());
             String[] names = ir.getLocalNames(ir.getInstructions().length - 1, lpk.getValueNumber());
             System.out.println("Analyzing local variable " + Arrays.toString(names) + " in method " + lpkMethod);
-arq.println("Analyzing local variable " + Arrays.toString(names) + " in method " + lpkMethod);
+            arq.println("Analyzing local variable " + Arrays.toString(names) + " in method " + lpkMethod);
         } else {
           continue;
         }
@@ -293,8 +296,12 @@ arq.println("Analyzing local variable " + Arrays.toString(names) + " in method "
               IR ir = cache.getIRFactory().makeIR(lpkMethod, Everywhere.EVERYWHERE,
                   options.getSSAOptions());
               String[] names = ir.getLocalNames(ir.getInstructions().length - 1, aliasLPK.getValueNumber());
-              System.out.println(" > possible alias: local " + Arrays.toString(names) + " in method " + lpkMethod);
-              arq.println(" > possible alias: local " + Arrays.toString(names) + " in method " + lpkMethod);
+              //tentativa de tirar coisas que não são necessárias pra diminuir a quantidade de linhas inútei
+              if(Util.isRelevantMethod(lpkMethod)){
+                System.out.println(" > possible alias: local " + Arrays.toString(names) + " in method " + lpkMethod);
+                arq.println(" > possible alias: local " + Arrays.toString(names) + " in method " + lpkMethod);
+              }
+              
             } else {
               System.out.println(" > unhandled pointer type: " + aliasPKey.getClass());
               arq.println(" > unhandled pointer type: " + aliasPKey.getClass());

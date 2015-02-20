@@ -14,6 +14,8 @@ import com.ibm.wala.shrikeCT.InvalidClassFileException;
 import com.ibm.wala.util.CancelException;
 import com.ibm.wala.util.WalaException;
 
+import depend.util.graph.SimpleGraph;
+
 public class GeeoIpTest extends RWTest {
   
   @Before
@@ -24,11 +26,14 @@ public class GeeoIpTest extends RWTest {
  //@Test
   public void testAtualizarProfessor() throws IOException, WalaException,
       CancelException, ParseException, InvalidClassFileException {
-    String strCompUnit = EXAMPLES_SRC + SEP + "escola-src" + SEP + "escola" + SEP + "fachadaEscola" + SEP + "Escola.java";
+    String compilationUnitName = EXAMPLES_SRC + SEP + "escola-src" + SEP + "escola" + SEP + "fachadaEscola" + SEP + "Escola.java";
     String line = "pessoas.atualizar(professor);";
     String expectedResultFile = TEST_DIR + SEP   + "rwsets/escola/GeeoIpTest.testAtualizarProfessor.data";
-    
-    checkDeps("escola", strCompUnit, line, JAR_FILENAME, expectedResultFile);
+    String prefix = "escola";
+    String targetLineInCompilationUnit = null; //linha que queremos alcançar com o compilação
+    String expectedResultFileName; //resultado esperado
+    String[] lineAndClass = depend.util.parser.Util.getLineAndWALAClassName(targetLineInCompilationUnit, compilationUnitName); 
+    SimpleGraph sg = depend.Main.analyze(JAR_FILENAME, prefix, Integer.parseInt(lineAndClass[0]), lineAndClass[1]);
   }
 
    //@Test

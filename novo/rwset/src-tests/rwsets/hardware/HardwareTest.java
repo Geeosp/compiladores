@@ -14,6 +14,8 @@ import com.ibm.wala.shrikeCT.InvalidClassFileException;
 import com.ibm.wala.util.CancelException;
 import com.ibm.wala.util.WalaException;
 
+import depend.util.graph.SimpleGraph;
+
 public class HardwareTest extends RWTest {
   
   @Before
@@ -23,6 +25,20 @@ public class HardwareTest extends RWTest {
   
   String srcdir = EXAMPLES_SRC + SEP + "hardware-src" ;
 
+  @Test
+  public void semanticAssertionA() throws IOException, WalaException,
+  CancelException, ParseException, InvalidClassFileException {
+    String compilationUnitName =  srcdir + SEP +  "hardware" + SEP + "Montador.java";
+    String targetLineInCompilationUnit = "opcode = R.OPCODE.get(i).binario;";
+    String expectedResultFile = TEST_DIR + SEP  + "rwsets/hardware/Hardware.testGetBinario.data";
+    String prefix = "hardware";
+    String jarFileName = EXAMPLES_JAR + SEP + "hardware.jar";
+    
+    String[] lineAndClass = depend.util.parser.Util.getLineAndWALAClassName(targetLineInCompilationUnit, compilationUnitName);
+    SimpleGraph sg = depend.Main.analyze(jarFileName, prefix, Integer.parseInt(lineAndClass[0]), lineAndClass[1]);
+  }
+  
+  
   //@Test
   public void testArquivoPrintln() throws IOException, WalaException,
       CancelException, ParseException, InvalidClassFileException {
@@ -33,17 +49,23 @@ public class HardwareTest extends RWTest {
     checkDeps("hardware", strCompUnit, line, JAR_FILENAME, expectedResultFile);
   }
 
-  //@Test
+  @Test
   public void testGetBinario() throws IOException, WalaException,
       CancelException, ParseException, InvalidClassFileException {
-    String strCompUnit =  srcdir + SEP +  "hardware" + SEP + "Montador.java";
+    String compilationUnitName =  srcdir + SEP +  "hardware" + SEP + "Montador.java";
+    String targetLineInCompilationUnit = "opcode = R.OPCODE.get(i).binario;";
     String expectedResultFile = TEST_DIR + SEP  + "rwsets/hardware/Hardware.testGetBinario.data";
-    String line = "opcode = R.OPCODE.get(i).binario;";
-
-    checkDeps("hardware", strCompUnit, line, JAR_FILENAME, expectedResultFile);
+    
+    String prefix = "hardware";
+    String jarFileName = EXAMPLES_JAR + SEP + "hardware.jar";
+    
+    String[] lineAndClass = depend.util.parser.Util.getLineAndWALAClassName(targetLineInCompilationUnit, compilationUnitName);
+    SimpleGraph sg = depend.Main.analyze(jarFileName, prefix, Integer.parseInt(lineAndClass[0]), lineAndClass[1]);
+    
+    
   }
   
-  //@Test
+ // @Test
   public void testImprimir() throws IOException, WalaException,
       CancelException, ParseException, InvalidClassFileException {
     String strCompUnit = srcdir + SEP +  "hardware" + SEP + "Montador.java";
@@ -54,7 +76,7 @@ public class HardwareTest extends RWTest {
 
   }
   
-  @Test
+  //@Test
   public void testOpcodeAdd() throws IOException, WalaException,
       CancelException, ParseException, InvalidClassFileException {
     String strCompUnit = srcdir + SEP +  "hardware" + SEP + "TipoJ.java";
