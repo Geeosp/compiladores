@@ -231,7 +231,7 @@ public class MethodDependencyAnalysis {
         //filter relevant fields
         if (ifk.getField().toString().contains(Util.APP_PREFIX)) {
           IField ifield = ifk.getField();
-          System.out.println("Analyzing the field/site: " + ifield + "--" + ifk.getInstanceKey());
+         // System.out.println("Analyzing the field/site: " + ifield + "--" + ifk.getInstanceKey());
           arq.println("Analyzing the field/site: " + ifield + "--" + ifk.getInstanceKey());
         } else {
           continue;
@@ -270,7 +270,7 @@ public class MethodDependencyAnalysis {
 //            }
 //            String[] names = ir.getLocalNames(index, lpk.getValueNumber());
             String[] names = ir.getLocalNames(ir.getInstructions().length - 1, lpk.getValueNumber());
-            System.out.println("Analyzing local variable " + Arrays.toString(names) + " in method " + lpkMethod);
+            //System.out.println("Analyzing local variable " + Arrays.toString(names) + " in method " + lpkMethod);
             arq.println("Analyzing local variable " + Arrays.toString(names) + " in method " + lpkMethod);
         } else {
           continue;
@@ -290,7 +290,7 @@ public class MethodDependencyAnalysis {
             if (aliasPKey instanceof InstanceFieldKey) {
               InstanceFieldKey aliasIFK = (InstanceFieldKey) aliasPKey;
               IField aliasIField = aliasIFK.getField();
-              System.out.println(" > possible alias: field " + aliasIField);
+              //System.out.println(" > possible alias: field " + aliasIField);
               arq.println(" > possible alias: field " + aliasIField);
             
             } else if (aliasPKey instanceof LocalPointerKey) {
@@ -301,13 +301,13 @@ public class MethodDependencyAnalysis {
               String[] names = ir.getLocalNames(ir.getInstructions().length - 1, aliasLPK.getValueNumber());
               //tentativa de tirar coisas que não são necessárias pra diminuir a quantidade de linhas inútei
               if(Util.isRelevantMethod(lpkMethod)){
-                System.out.println(" > possible alias: local " + Arrays.toString(names) + " in method " + lpkMethod);
+               // System.out.println(" > possible alias: local " + Arrays.toString(names) + " in method " + lpkMethod);
                 arq.println(" > possible alias: local " + Arrays.toString(names) + " in method " + lpkMethod);
               }
               
             } else {
-              System.out.println(" > unhandled pointer type: " + aliasPKey.getClass());
-              arq.println(" > unhandled pointer type: " + aliasPKey.getClass());
+            //  System.out.println(" > unhandled pointer type: " + aliasPKey.getClass());
+            //  arq.println(" > unhandled pointer type: " + aliasPKey.getClass());
             }
           }
         }

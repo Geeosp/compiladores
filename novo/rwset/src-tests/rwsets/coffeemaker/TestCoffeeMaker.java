@@ -34,7 +34,7 @@ public class TestCoffeeMaker extends RWTest {
     JAR_FILENAME = EXAMPLES_JAR + SEP + "coffee.jar";
   }
   
-  //@Test
+  @Test
   public void findChocolate() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
     String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
@@ -56,7 +56,7 @@ public class TestCoffeeMaker extends RWTest {
     }
   
   @Test
-  public void test0() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
+  public void usingTypoChocolatetringTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
     String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
     String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
@@ -71,71 +71,160 @@ public class TestCoffeeMaker extends RWTest {
     SimpleGraph sg = depend.Main.analyze(jarFileName, prefix, Integer.parseInt(lineAndClass[0]), lineAndClass[1]);
     
     MethodDependencyAnalysis mda= Main.mda;
-    PointerKey pk =  depend.PointsTo.getPointerKey(depend.MethodDependencyAnalysis.cgg, mda, "coffeeString", "< Application, Lcoffeemaker/Main, addRecipe()V >");
-    String[] depends =  {"[chocolateString] in method < Application, Lcoffeemaker/Main, editRecipe()V >"};
+    PointerKey pk =  depend.PointsTo.getPointerKey(depend.MethodDependencyAnalysis.cgg, mda, "chocolateString", "< Application, Lcoffeemaker/Main, addInventory()V >");
+    String[] depends =  {"[chocolatetring] in method < Application, Lcoffeemaker/Main, editRecipe()V >"};
     Assert.assertTrue(depend.PointsTo.checkDeps(mda, pk, depends));
     }
   
-//  Analyzing local variable [priceString] in method < Application, Lcoffeemaker/Main, addRecipe()V >
-//
-//  Analyzing local variable [coffeeString] in method < Application, Lcoffeemaker/Main, addRecipe()V >
-//  
-//  Analyzing local variable [milkString] in method < Application, Lcoffeemaker/Main, addRecipe()V >
-//  
-//  Analyzing local variable [sugarString] in method < Application, Lcoffeemaker/Main, addRecipe()V >
-//  
-//  Analyzing local variable [chocolateString] in method < Application, Lcoffeemaker/Main, addRecipe()V >
+  
+  //usamos um typo no depends "chocolatetring" pra dar erro e conferirmos o resultado 
+  @Test
+  public void recipeDeleteDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
+    String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
+    String targetLineInCompilationUnit = "r.getAmtSugar())";
+    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
+    String prefix = "coffee";
+    String jarFileName = JAR_FILENAME;
+     
+    Assert.assertTrue((new File(compilationUnitName)).exists());
+    Assert.assertTrue((new File(jarFileName)).exists());
+
+    String[] lineAndClass = depend.util.parser.Util.getLineAndWALAClassName(targetLineInCompilationUnit, compilationUnitName);
+    
+    SimpleGraph sg = depend.Main.analyze(jarFileName, prefix, Integer.parseInt(lineAndClass[0]), lineAndClass[1]);
+    
+    MethodDependencyAnalysis mda= Main.mda;
+    PointerKey pk =  depend.PointsTo.getPointerKey(depend.MethodDependencyAnalysis.cgg, mda, "recipeToPurchaseString", "< Application, Lcoffeemaker/Main, makeCoffee()V >");
+    String[] depends =  {"[recipeToDeleteString] in method < Application, Lcoffeemaker/Main, deleteRecipe()V >"};
+    Assert.assertTrue(depend.PointsTo.checkDeps(mda, pk, depends));
+    }
+
+//  Analyzing local variable [r] in method < Application, Lcoffeemaker/Recipe, equals(Lcoffeemaker/Recipe;)Z >
+
+  @Test
+  public void milkStringDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
+    String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
+    String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
+    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
+    String prefix = "coffee";
+    String jarFileName = JAR_FILENAME;
+     
+    Assert.assertTrue((new File(compilationUnitName)).exists());
+    Assert.assertTrue((new File(jarFileName)).exists());
+
+    String[] lineAndClass = depend.util.parser.Util.getLineAndWALAClassName(targetLineInCompilationUnit, compilationUnitName);
+    
+    SimpleGraph sg = depend.Main.analyze(jarFileName, prefix, Integer.parseInt(lineAndClass[0]), lineAndClass[1]);
+    
+    MethodDependencyAnalysis mda= Main.mda;
+    PointerKey pk =  depend.PointsTo.getPointerKey(depend.MethodDependencyAnalysis.cgg, mda, "chocolateString", "< Application, Lcoffeemaker/Main, addInventory()V >");
+    String[] depends =  {"[milkString] in method < Application, Lcoffeemaker/Main, editRecipe()V >"};
+    Assert.assertTrue(depend.PointsTo.checkDeps(mda, pk, depends));
+    }
+  
+  @Test
+  public void priceTagDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
+    String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
+    String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
+    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
+    String prefix = "coffee";
+    String jarFileName = JAR_FILENAME;
+     
+    Assert.assertTrue((new File(compilationUnitName)).exists());
+    Assert.assertTrue((new File(jarFileName)).exists());
+
+    String[] lineAndClass = depend.util.parser.Util.getLineAndWALAClassName(targetLineInCompilationUnit, compilationUnitName);
+    
+    SimpleGraph sg = depend.Main.analyze(jarFileName, prefix, Integer.parseInt(lineAndClass[0]), lineAndClass[1]);
+    
+    MethodDependencyAnalysis mda= Main.mda;
+    PointerKey pk =  depend.PointsTo.getPointerKey(depend.MethodDependencyAnalysis.cgg, mda, "chocolateString", "< Application, Lcoffeemaker/Main, addInventory()V >");
+    String[] depends =  {"[priceString] in method < Application, Lcoffeemaker/Main, addRecipe()V >"};
+    Assert.assertTrue(depend.PointsTo.checkDeps(mda, pk, depends));
+    }
+  
+  @Test
+  public void recipeToEditDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
+    String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
+    String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
+    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
+    String prefix = "coffee";
+    String jarFileName = JAR_FILENAME;
+     
+    Assert.assertTrue((new File(compilationUnitName)).exists());
+    Assert.assertTrue((new File(jarFileName)).exists());
+
+    String[] lineAndClass = depend.util.parser.Util.getLineAndWALAClassName(targetLineInCompilationUnit, compilationUnitName);
+    
+    SimpleGraph sg = depend.Main.analyze(jarFileName, prefix, Integer.parseInt(lineAndClass[0]), lineAndClass[1]);
+    
+    MethodDependencyAnalysis mda= Main.mda;
+    PointerKey pk =  depend.PointsTo.getPointerKey(depend.MethodDependencyAnalysis.cgg, mda, "chocolateString", "< Application, Lcoffeemaker/Main, addInventory()V >");
+    String[] depends =  {"[recipeToEditString] in method < Application, Lcoffeemaker/Main, editRecipe()V >"};
+    Assert.assertTrue(depend.PointsTo.checkDeps(mda, pk, depends));
+    }
   
   
-  //@Test
-  public void testAnalysisWithLineContents() throws Exception {
-    String strCompUnit = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
-    String exclusionFile = RESOURCES_DIR + SEP + "ExclusionAllJava.txt";
-    String exclusionFileForCallGraph = RESOURCES_DIR + SEP + "ExclusionForCallGraph.txt";
-    String coffeejar = EXAMPLES_JAR + SEP + "coffee.jar";
-    String targetClass = "Lcoffeemaker/CoffeeMaker";
-    String targetMethod = "editRecipe(Lcoffeemaker/Recipe;Lcoffeemaker/Recipe;)Z";
+  @Test
+  public void priceStringDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
+    String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
+    String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
+    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
+    String prefix = "coffee";
+    String jarFileName = JAR_FILENAME;
+     
+    Assert.assertTrue((new File(compilationUnitName)).exists());
+    Assert.assertTrue((new File(jarFileName)).exists());
 
-    // checks
-    Assert.assertTrue((new File(strCompUnit)).exists());
-    Assert.assertTrue((new File(exclusionFile)).exists());
-    Assert.assertTrue((new File(exclusionFileForCallGraph)).exists());
-    Assert.assertTrue((new File(coffeejar)).exists());
-
-
-    String[] args = new String[] { 
-        "-appJar=" + coffeejar,
-        "-printWalaWarnings=" + false, 
-        "-exclusionFile=" + exclusionFile,
-        "-exclusionFileForCallGraph=" + exclusionFileForCallGraph,
-        "-dotPath=" + "/usr/bin/dot", 
-        "-appPrefix=" + "coffee",
-        "-listAppClasses=" + false, 
-        "-listAllClasses=" + false,
-        "-listAppMethods=" + false, 
-        "-genCallGraph=" + false,
-        "-measureTime=" + false, 
-        "-reportType=" + "list",
-        "-targetClass=" + targetClass, 
-        "-targetMethod=" + targetMethod,
-        "-targetLine=99"};
+    String[] lineAndClass = depend.util.parser.Util.getLineAndWALAClassName(targetLineInCompilationUnit, compilationUnitName);
     
-    // reading and saving command-line properties
-    Properties p = CommandLine.parse(args);
-    Util.setProperties(p);
-
-    // clearing warnings from WALA
-    Warnings.clear();
-
-    MethodDependencyAnalysis mda = new MethodDependencyAnalysis(p);
-
-    // find informed class    
-    IClass clazz = depend.Main.findClass(mda);
-    //  find informed method
-    IMethod method = depend.Main.findMethod(clazz);
-    SimpleGraph sg = depend.Main.run(mda, method);
+    SimpleGraph sg = depend.Main.analyze(jarFileName, prefix, Integer.parseInt(lineAndClass[0]), lineAndClass[1]);
     
-    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.testAnalysisWithLineContents.data";
-    Assert.assertEquals(Helper.readFile(expectedResultFile), sg.toString());
-  } 
+    MethodDependencyAnalysis mda= Main.mda;
+    PointerKey pk =  depend.PointsTo.getPointerKey(depend.MethodDependencyAnalysis.cgg, mda, "priceString", "< Application, Lcoffeemaker/Main, addRecipe()V >");
+    String[] depends =  {"[milkString] in method < Application, Lcoffeemaker/Main, addRecipe()V >"};
+    Assert.assertTrue(depend.PointsTo.checkDeps(mda, pk, depends));
+    }
+  
+  @Test
+  public void RecipeToPurchaseDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
+    String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
+    String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
+    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
+    String prefix = "coffee";
+    String jarFileName = JAR_FILENAME;
+     
+    Assert.assertTrue((new File(compilationUnitName)).exists());
+    Assert.assertTrue((new File(jarFileName)).exists());
+
+    String[] lineAndClass = depend.util.parser.Util.getLineAndWALAClassName(targetLineInCompilationUnit, compilationUnitName);
+    
+    SimpleGraph sg = depend.Main.analyze(jarFileName, prefix, Integer.parseInt(lineAndClass[0]), lineAndClass[1]);
+    
+    MethodDependencyAnalysis mda= Main.mda;
+    PointerKey pk =  depend.PointsTo.getPointerKey(depend.MethodDependencyAnalysis.cgg, mda, "priceString", "< Application, Lcoffeemaker/Main, addRecipe()V >");
+    String[] depends =  {"[recipeToPurchaseString] in method < Application, Lcoffeemaker/Main, makeCoffee()V >"};
+    Assert.assertTrue(depend.PointsTo.checkDeps(mda, pk, depends));
+    }
+   
+  @Test
+  public void ToGetErrorDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
+    String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
+    String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
+    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
+    String prefix = "coffee";
+    String jarFileName = JAR_FILENAME;
+     
+    Assert.assertTrue((new File(compilationUnitName)).exists());
+    Assert.assertTrue((new File(jarFileName)).exists());
+
+    String[] lineAndClass = depend.util.parser.Util.getLineAndWALAClassName(targetLineInCompilationUnit, compilationUnitName);
+    
+    SimpleGraph sg = depend.Main.analyze(jarFileName, prefix, Integer.parseInt(lineAndClass[0]), lineAndClass[1]);
+    
+    MethodDependencyAnalysis mda= Main.mda;
+    PointerKey pk =  depend.PointsTo.getPointerKey(depend.MethodDependencyAnalysis.cgg, mda, "priceString", "< Application, Lcoffeemaker/Main, addRecipe()V >");
+    String[] depends =  {"[oldRecipe] in method < Application, Lcoffeemaker/Main, editRecipe()V >"};
+    Assert.assertTrue(depend.PointsTo.checkDeps(mda, pk, depends));
+  }
 } 

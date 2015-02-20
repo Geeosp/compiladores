@@ -65,7 +65,7 @@ public class PointsTo {
 
           String[] names = ir.getLocalNames(ir.getInstructions().length - 1,
               lpk.getValueNumber());
-          //System.out.println("Analyzing local variable " + Arrays.toString(names) + " in method " + lpkMethod);
+          
            arq.println("Analyzing local variable " + Arrays.toString(names) +
            " in method " + lpkMethod);
           
@@ -87,7 +87,6 @@ public class PointsTo {
   // checa as dependências associadas
 
   public static boolean checkDeps(MethodDependencyAnalysis mda, PointerKey pkey, String[] depends) throws CallGraphBuilderCancelException, ClassHierarchyException, IOException {
-
     PointerAnalysis pa = mda.getCallGraphGenerator().getPointerAnalysis();; 
     Iterator<PointerKey> it = mda.pa.getHeapModel().iteratePointerKeys();
     HeapGraph hgraph = mda.pa.getHeapGraph();
@@ -114,12 +113,12 @@ public class PointsTo {
             for (int i = 0; i < depends.length; i++) {
               if(!check[i]){
                 if(depends[i].equals(aliasIField.toString())){
+                  System.out.println("Prog" + aliasIField.toString() + "É IGUAL???"+  depends[i]);
                   check[i] = true;
                 }
               }
               
             }
-            //System.out.println(" > possible alias: field " + aliasIField);
             // arq.println(" > possible alias: field " + aliasIField);
             
           } else if (aliasPKey instanceof LocalPointerKey) {
@@ -134,14 +133,13 @@ public class PointsTo {
                 for (int i = 0; i < depends.length; i++) {
                   if(!check[i]){
                     if(depends[i].equals(Arrays.toString(names) +  " in method " + lpkMethod)){
+                      System.out.println(lpkMethod + "É IGUAL???"+  depends[i]);
                       check[i] = true;
                     }
                   }
                 }
                 
-            //System.out.println(" > possible alias: local "   + Arrays.toString(names) + " in method " + lpkMethod);
-            // arq.println(" > possible alias: local " + Arrays.toString(names)
-            // + " in method " + lpkMethod);
+             arq.println(" > possible alias: local " + Arrays.toString(names) + " in method " + lpkMethod);
           } else {
             //System.out.println(" > unhandled pointer type: "  + aliasPKey.getClass());
             // arq.println(" > unhandled pointer type: " +
