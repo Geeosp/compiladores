@@ -96,6 +96,7 @@ public class MethodDependencyAnalysis {
   // several caches
   static PointerAnalysis pa;
   static AnalysisCache cache;
+  public static CallGraphGenerator cgg;
   // application(instance)-specific caches
   private Map<IMethod, RWSet> rwSets = new HashMap<IMethod, RWSet>();
 
@@ -171,7 +172,8 @@ public class MethodDependencyAnalysis {
     if (PROPAGATE_CALLS) {
 
       // building the call graph
-      CallGraphGenerator cgg = this.getCallGraphGenerator();
+      //cgg = CallGraphGenerator
+      cgg = this.getCallGraphGenerator();
       Graph<CGNode> graph = cgg.getPrunedCallGraph();
       if (debugTime) {
         timer.stop();
@@ -186,7 +188,7 @@ public class MethodDependencyAnalysis {
       }
       
       //simple example of how to use pointer analysis. 
-      PointsTo.procurarPonteirosAssociados(cgg, this);
+      searchAliasedPointers(cgg);
         
       // propagate RWSet from calls (only private methods) to callers
       propagateRWSets(graph);
@@ -290,6 +292,7 @@ public class MethodDependencyAnalysis {
               IField aliasIField = aliasIFK.getField();
               System.out.println(" > possible alias: field " + aliasIField);
               arq.println(" > possible alias: field " + aliasIField);
+            
             } else if (aliasPKey instanceof LocalPointerKey) {
               LocalPointerKey aliasLPK = (LocalPointerKey) aliasPKey;
               IMethod lpkMethod = aliasLPK.getNode().getMethod();

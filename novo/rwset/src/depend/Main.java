@@ -130,6 +130,7 @@ public class Main {
    * @throws ParseException
    * @throws InvalidClassFileException 
    */
+  public static MethodDependencyAnalysis mda;
   public static SimpleGraph analyze(
       String appJar,  
       String appPrefix,
@@ -159,7 +160,7 @@ public class Main {
         "-reportType="+"dot"
     };
     
-    MethodDependencyAnalysis mda = createMDA(args);
+    mda = createMDA(args);
     
     // find informed class
     IClass clazz = mda.getCHA().lookupClass(TypeReference.findOrCreate(ClassLoaderReference.Application, targetClass));
