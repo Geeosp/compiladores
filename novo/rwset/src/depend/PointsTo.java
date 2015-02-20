@@ -69,7 +69,7 @@ public class PointsTo {
            arq.println("Analyzing local variable " + Arrays.toString(names) +
            " in method " + lpkMethod);
           
-           //retornando aqui o pkey que contem a variável e o método especificado no teste
+           //retornando aqui o pkey que contém a variável e o método especificado no teste
           if(Arrays.toString(names).contains(variable) && lpkMethod.toString().contains(method)){
             return pkey;
           }
@@ -148,6 +148,7 @@ public class PointsTo {
         }
       }
     }
+    //verificando se todas as dependências fazem parte e retornando a asserção
     boolean boo = true;
     for (int i = 0; i < check.length; i++) {
       boo = boo&&check[i];

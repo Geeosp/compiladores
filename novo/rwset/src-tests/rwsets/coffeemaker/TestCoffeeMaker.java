@@ -38,7 +38,6 @@ public class TestCoffeeMaker extends RWTest {
   public void findChocolate() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
     String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
-    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
     String prefix = "coffee";
     String jarFileName = JAR_FILENAME;
      
@@ -59,7 +58,6 @@ public class TestCoffeeMaker extends RWTest {
   public void usingTypoChocolatetringTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
     String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
-    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
     String prefix = "coffee";
     String jarFileName = JAR_FILENAME;
      
@@ -73,7 +71,7 @@ public class TestCoffeeMaker extends RWTest {
     MethodDependencyAnalysis mda= Main.mda;
     PointerKey pk =  depend.PointsTo.getPointerKey(depend.MethodDependencyAnalysis.cgg, mda, "chocolateString", "< Application, Lcoffeemaker/Main, addInventory()V >");
     String[] depends =  {"[chocolatetring] in method < Application, Lcoffeemaker/Main, editRecipe()V >"};
-    Assert.assertTrue(depend.PointsTo.checkDeps(mda, pk, depends));
+    Assert.assertFalse(depend.PointsTo.checkDeps(mda, pk, depends));
     }
   
   
@@ -82,7 +80,6 @@ public class TestCoffeeMaker extends RWTest {
   public void recipeDeleteDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
     String targetLineInCompilationUnit = "r.getAmtSugar())";
-    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
     String prefix = "coffee";
     String jarFileName = JAR_FILENAME;
      
@@ -105,7 +102,6 @@ public class TestCoffeeMaker extends RWTest {
   public void milkStringDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
     String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
-    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
     String prefix = "coffee";
     String jarFileName = JAR_FILENAME;
      
@@ -126,7 +122,6 @@ public class TestCoffeeMaker extends RWTest {
   public void priceTagDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
     String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
-    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
     String prefix = "coffee";
     String jarFileName = JAR_FILENAME;
      
@@ -147,7 +142,6 @@ public class TestCoffeeMaker extends RWTest {
   public void recipeToEditDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
     String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
-    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
     String prefix = "coffee";
     String jarFileName = JAR_FILENAME;
      
@@ -169,7 +163,6 @@ public class TestCoffeeMaker extends RWTest {
   public void priceStringDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
     String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
-    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
     String prefix = "coffee";
     String jarFileName = JAR_FILENAME;
      
@@ -187,10 +180,9 @@ public class TestCoffeeMaker extends RWTest {
     }
   
   @Test
-  public void RecipeToPurchaseDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
+  public void recipeToPurchaseDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
     String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
-    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
     String prefix = "coffee";
     String jarFileName = JAR_FILENAME;
      
@@ -203,15 +195,14 @@ public class TestCoffeeMaker extends RWTest {
     
     MethodDependencyAnalysis mda= Main.mda;
     PointerKey pk =  depend.PointsTo.getPointerKey(depend.MethodDependencyAnalysis.cgg, mda, "priceString", "< Application, Lcoffeemaker/Main, addRecipe()V >");
-    String[] depends =  {"[recipeToPurchaseString] in method < Application, Lcoffeemaker/Main, makeCoffee()V >"};
+    String[] depends =  {"[recipeToPurchaseString] in method < Application, Lcoffeemaker/Main, makeCoffee()V >", "[milkString] in method < Application, Lcoffeemaker/Main, addRecipe()V >"};
     Assert.assertTrue(depend.PointsTo.checkDeps(mda, pk, depends));
     }
    
   @Test
-  public void ToGetErrorDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
+  public void toGetErrorDependencyTest() throws IOException, WalaException, CancelException, ParseException, InvalidClassFileException {
     String compilationUnitName = EXAMPLES_SRC + SEP + "coffeemaker/CoffeeMaker.java";
     String targetLineInCompilationUnit = "if(addRecipe(newRecipe)) {";
-    String expectedResultFile = TEST_DIR + SEP + "rwsets/coffeemaker/TestCoffeeMaker.test0.data";
     String prefix = "coffee";
     String jarFileName = JAR_FILENAME;
      
@@ -225,6 +216,6 @@ public class TestCoffeeMaker extends RWTest {
     MethodDependencyAnalysis mda= Main.mda;
     PointerKey pk =  depend.PointsTo.getPointerKey(depend.MethodDependencyAnalysis.cgg, mda, "priceString", "< Application, Lcoffeemaker/Main, addRecipe()V >");
     String[] depends =  {"[oldRecipe] in method < Application, Lcoffeemaker/Main, editRecipe()V >"};
-    Assert.assertTrue(depend.PointsTo.checkDeps(mda, pk, depends));
+    Assert.assertFalse(depend.PointsTo.checkDeps(mda, pk, depends));
   }
 } 
